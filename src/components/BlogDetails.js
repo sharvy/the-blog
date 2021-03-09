@@ -1,15 +1,16 @@
 import { useHistory, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { API_SERVER } from "../constants";
 
 const BlogDetails = () => {
   const { id } = useParams();
   const { data: blog, isPending, error } = useFetch(
-    `http://localhost:8000/blogs/${id}`
+    `${API_SERVER}/posts/${id}`
   );
   const history = useHistory();
 
   const onDelete = () => {
-    fetch("http://localhost:8000/blogs/" + blog.id, {
+    fetch(`${API_SERVER}/posts/` + blog.id, {
       method: "DELETE",
     }).then(() => {
       history.push("/");

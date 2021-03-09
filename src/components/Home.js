@@ -1,8 +1,9 @@
 import BlogList from "./BlogList";
 import useFetch from "../hooks/useFetch";
+import { API_SERVER } from "../constants";
 
 const Home = () => {
-  const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs");
+  const { data: blogs, isPending, error } = useFetch(`${API_SERVER}/posts`);
 
   return (
     <div className="home">

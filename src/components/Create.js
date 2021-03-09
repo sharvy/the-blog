@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { API_SERVER } from "../constants";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -11,10 +12,10 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const blog = { title, body, author };
+    const blog = { title, body };
     setIsPending(true);
 
-    fetch("http://localhost:8000/blogs", {
+    fetch(`${API_SERVER}/posts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
@@ -42,11 +43,11 @@ const Create = () => {
           value={body}
           onChange={(e) => setBody(e.target.value)}
         ></textarea>
-        <label>Blog Author:</label>
+        {/* <label>Blog Author:</label>
         <select value={author} onChange={(e) => setAuthor(e.target.value)}>
           <option value="mario">Mario</option>
           <option value="yoshi">Yoshi</option>
-        </select>
+        </select> */}
         {!isPending && <button>Add Blog</button>}
         {isPending && <button disabled>Adding Blog...</button>}
       </form>
